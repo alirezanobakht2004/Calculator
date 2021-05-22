@@ -1,8 +1,10 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.gui.CalculatorGui;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -12,23 +14,20 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        // todo: don't modify this method.
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        CalculatorGui calculatorGui = new CalculatorGui();
 
-        // todo: create a CalculatorGui.
-        // todo: set its EventsHandlers.
-        // todo: create some Panes.
-        // todo: add your nodes to the panes (use CalculatorGui's interface (addNodesToPane)).
+        GridPane gp = new GridPane();
+        VBox vBox = new VBox();
+        calculatorGui.setEventsHandlers();
+        calculatorGui.addNodesToPane(gp, vBox);
 
-        // todo: set your main pane to scene. (change argument of Scene constructor)
-        Scene scene = new Scene(new Pane());
-
+        Scene scene = new Scene(vBox);
         primaryStage.setScene(scene);
         primaryStage.show();
-        // todo: enjoy your graphical calculator.
     }
 }

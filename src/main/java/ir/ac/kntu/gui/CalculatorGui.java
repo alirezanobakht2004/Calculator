@@ -1,11 +1,30 @@
 package ir.ac.kntu.gui;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-/**
- * @author sina rostami
- */
+
 public class CalculatorGui {
+    TextField testField;
+    Button zero;
+    Button one;
+    Button two;
+    Button three;
+    Button four;
+    Button five;
+    Button six;
+    Button seven;
+    Button eight;
+    Button nine;
+    Button equal;
+    Button multiplication;
+    Button plus;
+    Button minus;
+    Button division;
+    Button clear;
+
+
     //todo: declare gui nodes eg. calculator buttons and text-field
 
     public CalculatorGui() {

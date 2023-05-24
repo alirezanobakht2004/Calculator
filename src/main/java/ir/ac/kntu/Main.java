@@ -6,13 +6,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-/**
- * @author Sina Rostami
- */
 public class Main extends Application {
 
     public static void main(String[] args) {
-        // todo: don't modify this method.
         launch(args);
     }
 

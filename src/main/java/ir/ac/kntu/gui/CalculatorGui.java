@@ -70,7 +70,9 @@ public class CalculatorGui {
         keyboardBan();
         zero.setOnMouseClicked(e -> {
             afterEqual(textField.getText());
-            textField.setText(textField.getText() + "0");
+            if (!textField.getText().contains("0")) {
+                textField.setText(textField.getText() + "0");
+            }
         });
         one.setOnMouseClicked(e -> {
             afterEqual(textField.getText());
@@ -201,6 +203,11 @@ public class CalculatorGui {
         colThree = new HBox(four, five, six, minus);
         colFour = new HBox(one, two, three, division);
         colFive = new HBox(clear, zero, equal, multiplication);
+        colOne.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        colTwo.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        colThree.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        colFour.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        colFive.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
         colTwo.setPadding(new Insets(10, 0, 0, 30));
         colTwo.setSpacing(10);
         colThree.setPadding(new Insets(10, 0, 0, 30));
@@ -312,8 +319,9 @@ public class CalculatorGui {
         setRows();
         vBox = new VBox(colOne, colTwo, colThree, colFour, colFive);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setMaxHeight(Double.MAX_VALUE);
+        vBox.setMaxWidth(Double.MAX_VALUE);
         pane.getChildren().add(vBox);
-
 
     }
 }

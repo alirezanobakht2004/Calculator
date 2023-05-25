@@ -1,11 +1,15 @@
 package ir.ac.kntu.gui;
 
+import ir.ac.kntu.logic.Calculator;
+import ir.ac.kntu.logic.Operator;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -57,9 +61,106 @@ public class CalculatorGui {
         clear = new Button();
     }
 
+    public void keyboardBan() {
+        textField.addEventFilter(KeyEvent.KEY_TYPED, Event::consume);
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, Event::consume);
+    }
+
     public void setEventsHandlers() {
-        //todo: set your fields event handler on mouse clicked.
-        //todo: use lambdas as much as possible :)
+        keyboardBan();
+        zero.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "0");
+        });
+        one.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "1");
+        });
+        two.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "2");
+        });
+        three.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "3");
+        });
+        four.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "4");
+        });
+        five.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "5");
+        });
+        six.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "6");
+        });
+        seven.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "7");
+        });
+        eight.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "8");
+        });
+        nine.setOnMouseClicked(e -> {
+            textField.setText(textField.getText() + "9");
+        });
+        minus.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "-");
+            }
+        });
+        plus.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "+");
+            }
+        });
+        division.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "/");
+            }
+        });
+        multiplication.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "*");
+            }
+        });
+        clear.setOnMouseClicked(e -> {
+            textField.setText("");
+        });
+        equal.setOnMouseClicked(e -> {
+            textField.setText(mathEqual(textField.getText()));
+        });
+    }
+
+    public boolean operandContainer(String str) {
+        if (str.contains("/") || str.contains("+") || str.contains("-") || str.contains("*")) {
+            return true;
+        }
+        return false;
+    }
+
+    public String mathEqual(String str) {
+        if (operandContainer(str) && Character.isDigit(str.charAt(str.length() - 1))) {
+            for (int i = 0; i < str.length(); i++) {
+                if (!Character.isDigit(str.charAt(i)) && str.charAt(i) != '.') {
+                    StringBuilder firstNum = new StringBuilder(str.substring(0, i));
+                    StringBuilder secondNum = new StringBuilder(str.substring(i + 1));
+                    StringBuilder operator = new StringBuilder(operatorSwitch(str.charAt(i)));
+                    return String.valueOf(Calculator.calculate(firstNum, secondNum, operator));
+                }
+            }
+            return str;
+        }
+        return str;
+    }
+
+    public String operatorSwitch(char opr) {
+        switch (opr) {
+            case '+':
+                return String.valueOf(Operator.PLUS);
+            case '-':
+                return String.valueOf(Operator.MINUS);
+            case '*':
+                return String.valueOf(Operator.MULTIPLY);
+            case '/':
+                return String.valueOf(Operator.DIVIDE);
+            default:
+                return "";
+        }
     }
 
     public void setRows() {
@@ -78,13 +179,12 @@ public class CalculatorGui {
         colFive.setSpacing(10);
         textField.setPrefSize(500, 100);
         zero.setPrefSize(100, 100);
-        System.out.println(getClass().getResourceAsStream("0.jpg"));
         ImageView view0 = new ImageView(new Image("buttons/0.jpg"));
         view0.setPreserveRatio(true);
         view0.setFitHeight(100);
         zero.setGraphic(view0);
-       zero.setPadding(Insets.EMPTY);
-         one.setPrefSize(100, 100);
+        zero.setPadding(Insets.EMPTY);
+        one.setPrefSize(100, 100);
         ImageView view1 = new ImageView(new Image("buttons/1.jpg"));
         view1.setPreserveRatio(true);
         view1.setFitHeight(100);
@@ -182,8 +282,6 @@ public class CalculatorGui {
         vBox.setAlignment(Pos.CENTER);
         pane.getChildren().add(vBox);
 
-        //todo: add your fields to pane in an appropriate order :)
-        //todo: cast the pane to which child you need, eg. GridPane, VBox, etc.
-        //todo: you can change signature of this method if you need more than a single pane.
+
     }
 }

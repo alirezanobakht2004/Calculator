@@ -90,6 +90,33 @@ public class CalculatorGui {
 
     public void setEventsHandlers() {
         keyboardBan();
+        setEventsHandlersOne();
+        setEventsHandlersTwo();
+        plus.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "+");
+            }
+        });
+        division.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "/");
+            }
+        });
+        multiplication.setOnMouseClicked(e -> {
+            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
+                textField.setText(textField.getText() + "*");
+            }
+        });
+        clear.setOnMouseClicked(e -> {
+            textField.setText("");
+        });
+        equal.setOnMouseClicked(e -> {
+            textField.setText(mathEqual(textField.getText()));
+
+        });
+    }
+
+    public void setEventsHandlersOne() {
         zero.setOnMouseClicked(e -> {
             afterEqual(textField.getText());
             if (!textField.getText().contains("0")) {
@@ -112,6 +139,9 @@ public class CalculatorGui {
             afterEqual(textField.getText());
             textField.setText(textField.getText() + "4");
         });
+    }
+
+    public void setEventsHandlersTwo() {
         five.setOnMouseClicked(e -> {
             afterEqual(textField.getText());
             textField.setText(textField.getText() + "5");
@@ -136,28 +166,6 @@ public class CalculatorGui {
             if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
                 textField.setText(textField.getText() + "-");
             }
-        });
-        plus.setOnMouseClicked(e -> {
-            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
-                textField.setText(textField.getText() + "+");
-            }
-        });
-        division.setOnMouseClicked(e -> {
-            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
-                textField.setText(textField.getText() + "/");
-            }
-        });
-        multiplication.setOnMouseClicked(e -> {
-            if (!textField.getText().isEmpty() && !operandContainer(textField.getText())) {
-                textField.setText(textField.getText() + "*");
-            }
-        });
-        clear.setOnMouseClicked(e -> {
-            textField.setText("");
-        });
-        equal.setOnMouseClicked(e -> {
-            textField.setText(mathEqual(textField.getText()));
-
         });
     }
 
@@ -220,15 +228,6 @@ public class CalculatorGui {
     }
 
     public void setRows() {
-        setRowOne();
-        setRowTwo();
-        setRowThree();
-        minus.setPrefSize(100, 100);
-        ImageView view11 = new ImageView(new Image("minus.jpg"));
-        view11.setPreserveRatio(true);
-        view11.setFitHeight(100);
-        minus.setPadding(Insets.EMPTY);
-        minus.setGraphic(view11);
         multiplication.setPrefSize(100, 100);
         ImageView view12 = new ImageView(new Image("multiply.jpg"));
         view12.setPreserveRatio(true);
@@ -255,17 +254,24 @@ public class CalculatorGui {
         division.setGraphic(view15);
     }
 
+    public void setRowZero() {
+        setRowOne();
+        setRowTwo();
+        setRowThree();
+        minus.setPrefSize(100, 100);
+        ImageView view11 = new ImageView(new Image("minus.jpg"));
+        view11.setPreserveRatio(true);
+        view11.setFitHeight(100);
+        minus.setPadding(Insets.EMPTY);
+        minus.setGraphic(view11);
+    }
+
     public void setRowOne() {
         colOne = new HBox(textField);
         colTwo = new HBox(seven, eight, nine, plus);
         colThree = new HBox(four, five, six, minus);
         colFour = new HBox(one, two, three, division);
         colFive = new HBox(clear, zero, equal, multiplication);
-        colOne.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        colTwo.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        colThree.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        colFour.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        colFive.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         colTwo.setPadding(new Insets(10, 0, 0, 30));
         colTwo.setSpacing(10);
         colThree.setPadding(new Insets(10, 0, 0, 30));
@@ -281,15 +287,15 @@ public class CalculatorGui {
         view0.setFitHeight(100);
         zero.setGraphic(view0);
         zero.setPadding(Insets.EMPTY);
-    }
-
-    public void setRowTwo() {
         one.setPrefSize(100, 100);
         ImageView view1 = new ImageView(new Image("1.jpg"));
         view1.setPreserveRatio(true);
         view1.setFitHeight(100);
         one.setPadding(Insets.EMPTY);
         one.setGraphic(view1);
+    }
+
+    public void setRowTwo() {
         two.setPrefSize(100, 100);
         ImageView view2 = new ImageView(new Image("2.jpg"));
         view2.setPreserveRatio(true);
@@ -314,15 +320,15 @@ public class CalculatorGui {
         view5.setFitHeight(100);
         five.setPadding(Insets.EMPTY);
         five.setGraphic(view5);
-    }
-
-    public void setRowThree() {
         six.setPrefSize(100, 100);
         ImageView view6 = new ImageView(new Image("6.jpg"));
         view6.setPreserveRatio(true);
         view6.setFitHeight(100);
         six.setPadding(Insets.EMPTY);
         six.setGraphic(view6);
+    }
+
+    public void setRowThree() {
         seven.setPrefSize(100, 100);
         ImageView view7 = new ImageView(new Image("7.jpg"));
         view7.setPreserveRatio(true);

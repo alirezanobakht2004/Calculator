@@ -228,6 +228,7 @@ public class CalculatorGui {
     }
 
     public void setRows() {
+        setRowZero();
         multiplication.setPrefSize(100, 100);
         ImageView view12 = new ImageView(new Image("multiply.jpg"));
         view12.setPreserveRatio(true);
@@ -264,6 +265,12 @@ public class CalculatorGui {
         view11.setFitHeight(100);
         minus.setPadding(Insets.EMPTY);
         minus.setGraphic(view11);
+        two.setPrefSize(100, 100);
+        ImageView view2 = new ImageView(new Image("2.jpg"));
+        view2.setPreserveRatio(true);
+        view2.setFitHeight(100);
+        two.setPadding(Insets.EMPTY);
+        two.setGraphic(view2);
     }
 
     public void setRowOne() {
@@ -296,12 +303,6 @@ public class CalculatorGui {
     }
 
     public void setRowTwo() {
-        two.setPrefSize(100, 100);
-        ImageView view2 = new ImageView(new Image("2.jpg"));
-        view2.setPreserveRatio(true);
-        view2.setFitHeight(100);
-        two.setPadding(Insets.EMPTY);
-        two.setGraphic(view2);
         three.setPrefSize(100, 100);
         ImageView view3 = new ImageView(new Image("3.jpg"));
         view3.setPreserveRatio(true);
